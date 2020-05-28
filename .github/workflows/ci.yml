@@ -1,0 +1,22 @@
+on:
+  push:
+
+jobs:
+
+  espresso:
+    name: Espresso Instrumented tests
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Assemble APK
+        run: ./gradlew assemble
+
+      - name: Run instrumented tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          arch: x86
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -camera-back none
+          script: ./gradlew connectedStagingDebugAndroidTest
