@@ -5,6 +5,7 @@ jobs:
 
   espresso:
     name: Espresso Instrumented tests
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
